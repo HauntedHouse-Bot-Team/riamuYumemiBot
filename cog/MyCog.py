@@ -55,7 +55,7 @@ class MyBot(commands.Cog):
         await ctx.send(embed=embed)
 
     @commands.command(name='サーバー別致し件数')
-    async def masturbation_list(self, ctx):
+    async def masturbation_count_list_by_servers(self, ctx):
         mod = myMod()
         bot = self.bot.get_user(self.bot_id)
         icon = self.icon_url.format(
@@ -72,7 +72,7 @@ class MyBot(commands.Cog):
         await ctx.send(embed=embed)
 
     @commands.command(name='オタク別致し件数')
-    async def masturbation_list(self, ctx):
+    async def masturbation_count_list_by_users(self, ctx):
         mod = myMod()
         bot = self.bot.get_user(self.bot_id)
         icon = self.icon_url.format(
