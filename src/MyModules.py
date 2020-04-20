@@ -38,3 +38,18 @@ class MyModules:
         except:
             cnx.rollback()
             raise
+
+    def get_count_list_by_guild(self):
+        sql = 'SELECT guild ,COUNT(guild) as count FROM masturbation_log GROUP BY guild'
+
+        cnx = self.__db_connect()
+        cur = cnx.cursor(dictionary=True)
+        try:
+            cur.execute(sql)
+            response = cur.fetchall()
+            cur.close()
+        except e:
+            print(e)
+            raise
+
+        return response
