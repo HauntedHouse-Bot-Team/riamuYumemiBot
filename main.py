@@ -4,7 +4,7 @@ import configparser
 from discord.ext import commands
 
 INITIAL_EXTENSIONS = [
-    'cog.bot_cog',
+    'cog.MyCog',
 ]
 
 class MyBot(commands.Bot):
