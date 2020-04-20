@@ -1,5 +1,6 @@
 [DEFAULT]
 BOT_TOKEN = token
+BOT_ID = id
 
 [DATABASE]
 USER = root
