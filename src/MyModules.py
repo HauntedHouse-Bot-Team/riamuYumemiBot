@@ -52,6 +52,8 @@ class MyModules:
             print(e)
             raise
 
+        return response
+
     def get_count_list_by_user(self):
         sql = 'SELECT user, COUNT(guild) as count FROM masturbation_log GROUP BY user'
 
