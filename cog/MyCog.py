@@ -108,5 +108,28 @@ class MyBot(commands.Cog):
         embed.set_author(name='夢見りあむ', icon_url=icon)
         await ctx.send(embed=embed)
 
+    @commands.command(name='オタクのおかずリスト')
+    async def fap_material_list_by_user(self, ctx, arg):
+        mod = myMod()
+        bot = self.bot.get_user(self.bot_id)
+        icon = self.icon_url.format(
+            id = str(self.bot_id),
+            avatar = bot.avatar
+        )
+        embed_description = '>>> '
+        list_by_fap_material = mod.get_list_by_otaku_fap_material(arg)
+
+        if not list_by_fap_material:
+            await ctx.send('誰だ？そいつ')
+            return False
+
+        for row in list_by_fap_material:
+            embed_description += f"{row['user']}: {row['fap_material']} {row['count']}回\n"
+
+        embed = discord.Embed(title='オタクのおかずリスト', description=embed_description, color=0xff66cf)
+        embed.set_author(name='夢見りあむ', icon_url=icon)
+        await ctx.send(embed=embed)
+
+
 def setup(bot):
     bot.add_cog(MyBot(bot))

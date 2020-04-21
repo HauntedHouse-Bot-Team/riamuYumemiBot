@@ -80,4 +80,19 @@ class MyModules:
             print(e)
             raise
 
+    def get_list_by_otaku_fap_material(self, user):
+        sql = "SELECT user, fap_material, COUNT(fap_material) as count from masturbation_log WHERE user = '{user}' GROUP BY fap_material ORDER BY count DESC".format(
+            user = user,
+        )
+
+        cnx = self.__db_connect()
+        cur = cnx.cursor(dictionary=True)
+        try:
+            cur.execute(sql)
+            response = cur.fetchall()
+            cur.close()
+        except e:
+            print(e)
+            raise
+
         return response
