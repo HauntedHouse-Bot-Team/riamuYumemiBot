@@ -63,9 +63,9 @@ class MyBot(commands.Cog):
             avatar = bot.avatar,
         )
         embed_description = '>>> '
-        list_by_guild = mod.get_count_list_by_user()
+        list_by_guild = mod.get_count_list_by_guild()
         for row in list_by_guild:
-            embed_description += f"{row['user']}: {row['count']}\n"
+            embed_description += f"{row['guild']}: {row['count']}\n"
 
         embed = discord.Embed(title='オタク別致し件数', description=embed_description, color=0xff66cf)
         embed.set_author(name='夢見りあむ', icon_url=icon)
@@ -80,9 +80,9 @@ class MyBot(commands.Cog):
             avatar = bot.avatar,
         )
         embed_description = '>>> '
-        list_by_guild = mod.get_count_list_by_guild()
+        list_by_guild = mod.get_count_list_by_user()
         for row in list_by_guild:
-            embed_description += f"{row['guild']}: {row['count']}\n"
+            embed_description += f"{row['user']}: {row['count']}\n"
 
         embed = discord.Embed(title='サーバー別致し件数', description=embed_description, color=0xff66cf)
         embed.set_author(name='夢見りあむ', icon_url=icon)
