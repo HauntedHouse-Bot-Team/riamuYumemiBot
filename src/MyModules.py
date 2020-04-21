@@ -40,7 +40,7 @@ class MyModules:
             raise
 
     def get_count_list_by_guild(self):
-        sql = 'SELECT guild ,COUNT(guild) as count FROM masturbation_log GROUP BY guild'
+        sql = 'SELECT guild ,COUNT(guild) as count FROM masturbation_log GROUP BY guild  ORDER BY count DESC'
 
         cnx = self.__db_connect()
         cur = cnx.cursor(dictionary=True)
@@ -55,7 +55,7 @@ class MyModules:
         return response
 
     def get_count_list_by_user(self):
-        sql = 'SELECT user, COUNT(guild) as count FROM masturbation_log GROUP BY user'
+        sql = 'SELECT user, COUNT(guild) as count FROM masturbation_log GROUP BY user ORDER BY count DESC'
 
         cnx = self.__db_connect()
         cur = cnx.cursor(dictionary=True)
