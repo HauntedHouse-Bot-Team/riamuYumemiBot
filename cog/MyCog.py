@@ -65,7 +65,7 @@ class MyBot(commands.Cog):
         embed_description = '>>> '
         list_by_guild = mod.get_count_list_by_guild()
         for row in list_by_guild:
-            embed_description += f"{row['guild']}: {row['count']}\n"
+            embed_description += f"{row['guild']}: {row['count']}件\n"
 
         embed = discord.Embed(title='サーバー別致し件数', description=embed_description, color=0xff66cf)
         embed.set_author(name='夢見りあむ', icon_url=icon)
@@ -82,7 +82,7 @@ class MyBot(commands.Cog):
         embed_description = '>>> '
         list_by_guild = mod.get_count_list_by_user()
         for row in list_by_guild:
-            embed_description += f"{row['user']}: {row['count']}\n"
+            embed_description += f"{row['user']}: {row['count']}件\n"
 
         embed = discord.Embed(title='オタク別致し件数', description=embed_description, color=0xff66cf)
         embed.set_author(name='夢見りあむ', icon_url=icon)
@@ -99,7 +99,7 @@ class MyBot(commands.Cog):
         embed_description = '>>> '
         fap_material_ranking = mod.get_count_list_by_fap_material()
         for row in fap_material_ranking:
-            embed_description += f"{row['fap_material']}: {row['count']}\n"
+            embed_description += f"{row['fap_material']}: {row['count']}回\n"
 
         embed = discord.Embed(title='おかずランキング', description=embed_description, color=0xff66cf)
         embed.set_author(name='夢見りあむ', icon_url=icon)
