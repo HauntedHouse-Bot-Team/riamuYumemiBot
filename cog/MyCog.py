@@ -30,6 +30,9 @@ class MyBot(commands.Cog):
 
     @commands.command(name='致した')
     async def masturbation(self, ctx, arg):
+        if not arg:
+            return False
+
         mod = myMod()
 
         bot = self.bot.get_user(self.bot_id)
