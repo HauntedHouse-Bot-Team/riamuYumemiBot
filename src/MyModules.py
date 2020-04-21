@@ -67,4 +67,17 @@ class MyModules:
             print(e)
             raise
 
+    def get_count_list_by_fap_material(self):
+        sql = 'SELECT fap_material ,COUNT(fap_material) as count FROM masturbation_log GROUP BY fap_material ORDER BY count DESC'
+
+        cnx = self.__db_connect()
+        cur = cnx.cursor(dictionary=True)
+        try:
+            cur.execute(sql)
+            response = cur.fetchall()
+            cur.close()
+        except e:
+            print(e)
+            raise
+
         return response

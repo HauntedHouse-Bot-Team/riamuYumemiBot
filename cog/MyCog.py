@@ -88,5 +88,22 @@ class MyBot(commands.Cog):
         embed.set_author(name='夢見りあむ', icon_url=icon)
         await ctx.send(embed=embed)
 
+    @commands.command(name='おかずランキング')
+    async def fap_material_ranking_list(self, ctx):
+        mod = myMod()
+        bot = self.bot.get_user(self.bot_id)
+        icon = self.icon_url.format(
+            id = str(self.bot_id),
+            avatar = bot.avatar
+        )
+        embed_description = '>>> '
+        fap_material_ranking = mod.get_count_list_by_fap_material()
+        for row in fap_material_ranking:
+            embed_description += f"{row['fap_material']}: {row['count']}\n"
+
+        embed = discord.Embed(title='おかずランキング', description=embed_description, color=0xff66cf)
+        embed.set_author(name='夢見りあむ', icon_url=icon)
+        await ctx.send(embed=embed)
+
 def setup(bot):
     bot.add_cog(MyBot(bot))
