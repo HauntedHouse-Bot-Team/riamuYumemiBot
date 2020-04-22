@@ -1,6 +1,6 @@
 import configparser
 import os
-
+import random
 
 import discord
 from discord.ext import commands
@@ -27,6 +27,32 @@ class MyBot(commands.Cog):
         embed = discord.Embed(title='こんにちはクズだよ！！', color=0xff66cf)
         embed.set_author(name='夢見りあむ', icon_url=icon)
         await ctx.send(embed=embed)
+
+    @commands.Cog.listener()
+    async def on_menber_join(self, member):
+        bot = self.bot.get_user(self.bot_id)
+        icon = self.icon_url.format(
+            id = str(self.bot_id),
+            avatar = bot.avatar,
+        )
+        guild = member.guild
+
+        greeting_list = [
+            'オタク！ぼくをすこれ！よ！',
+            'こんにちはクズだよ！！',
+        ]
+
+        embed = discord.Embed(description=random.choice(greeting_list))
+        embed.set_author(name='夢見りあむ', icon_url=icon)
+        embed.add_field(name='ようこそ魔境へ！', value=f'{member.mention}', inline=False)
+
+        if guild.name == 'プリムラでムラムラ':
+            channel = discord.utils.get(guild.text_channels, name='入場ゲート')
+            await channel.send(embed)
+
+        if guild.name == '幽霊屋敷':
+            channel = discord.utils.get(guild.text_channels, name='入場ゲート')
+            await channel.send(embed)
 
     @commands.command(name='致した')
     async def masturbation(self, ctx, arg):
