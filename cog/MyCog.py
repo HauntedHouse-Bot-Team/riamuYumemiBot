@@ -51,7 +51,7 @@ class MyBot(commands.Cog):
             await channel.send(embed=embed)
 
         if guild.name == '幽霊屋敷':
-            channel = discord.utils.get(guild.text_channels, name='入場ゲート')
+            channel = discord.utils.get(guild.text_channels, name='玄関')
             await channel.send(embed=embed)
 
     @commands.command(name='致した')
