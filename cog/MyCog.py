@@ -127,6 +127,8 @@ class MyBot(commands.Cog):
         )
         embed_description = '>>> '
         fap_material_ranking = mod.get_count_list_by_fap_material()
+        if not fap_material_ranking:
+            return False
         for row in fap_material_ranking:
             embed_description += f"{row['fap_material']}: {row['count']}回\n"
 

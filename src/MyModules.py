@@ -67,6 +67,8 @@ class MyModules:
             print(e)
             raise
 
+        return response
+
     def get_count_list_by_fap_material(self):
         sql = 'SELECT fap_material ,COUNT(fap_material) as count FROM masturbation_log GROUP BY fap_material ORDER BY count DESC'
 
@@ -79,6 +81,8 @@ class MyModules:
         except e:
             print(e)
             raise
+
+        return response
 
     def get_list_by_otaku_fap_material(self, user):
         sql = "SELECT user, fap_material, COUNT(fap_material) as count from masturbation_log WHERE user = '{user}' GROUP BY fap_material ORDER BY count DESC".format(
