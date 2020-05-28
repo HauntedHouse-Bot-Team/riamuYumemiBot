@@ -158,6 +158,10 @@ class MyBot(commands.Cog):
         embed.set_author(name='夢見りあむ', icon_url=icon)
         await ctx.send(embed=embed)
 
+    @commands.command(name='卒業')
+    async def graduate(self, ctx, arg):
+        usr = self.bot.get_user(int(arg))
+        await ctx.guild.kick(usr)
 
 def setup(bot):
     bot.add_cog(MyBot(bot))
