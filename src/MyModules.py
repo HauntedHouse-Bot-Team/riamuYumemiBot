@@ -2,24 +2,30 @@ import mysql.connector as connector
 import configparser
 import os
 
+from google.cloud import vision
+from google.cloud.vision import types
+
+from src.DbConnect import DbConnect as db
+from src.PictureDownload import picture_download
+
 class MyModules:
 
-    def __db_connect(self):
-        base = os.path.dirname(os.path.abspath(__file__))
-        conf_path = os.path.normpath(os.path.join(base, '../'))
-        conf = configparser.ConfigParser()
-        conf.read(conf_path+'/config/config.ini', encoding='utf-8')
-        try:
-            db = connector.connect(
-                user = conf['DATABASE']['USER'],
-                passwd = conf['DATABASE']['PASSWD'],
-                host = conf['DATABASE']['HOST'],
-                db = conf['DATABASE']['DB_NAME'],
-            )
-            return db
-        except Exception as e:
-            print(e)
-            raise
+    def __init__(self):
+        self.db = db()
+
+    def text_detection(self, url: str):
+
+        file_path = picture_download(url)
+        client = vision.ImageAnnotatorClient()
+
+        with open(file_path, 'rb') as image_file:
+            content = image_file.read()
+
+        image = vision.types.Image(content=content)
+        response = client.text_detection(image=image)
+        texts = response.text_annotations
+
+        return texts[0].description
 
     def seve_masturbation_log(self, user: str, fap_material: str, guild: str):
 
@@ -30,24 +36,19 @@ class MyModules:
             guild = guild
         )
 
-        cnx = self.__db_connect()
-        cur = cnx.cursor()
         try:
-            cur.execute(sql)
-            cnx.commit()
+            self.db.insert(sql)
+            return True
         except:
             cnx.rollback()
             raise
 
     def get_count_list_by_guild(self):
-        sql = 'SELECT guild ,COUNT(guild) as count FROM masturbation_log GROUP BY guild  ORDER BY count DESC'
 
-        cnx = self.__db_connect()
-        cur = cnx.cursor(dictionary=True)
+        sql = 'SELECT guild, COUNT(guild) as count FROM masturbation_log GROUP BY guild  ORDER BY count DESC'
+
         try:
-            cur.execute(sql)
-            response = cur.fetchall()
-            cur.close()
+            response = self.db.select(sql)
         except e:
             print(e)
             raise
@@ -55,14 +56,11 @@ class MyModules:
         return response
 
     def get_count_list_by_user(self):
+
         sql = 'SELECT user, COUNT(guild) as count FROM masturbation_log GROUP BY user ORDER BY count DESC'
 
-        cnx = self.__db_connect()
-        cur = cnx.cursor(dictionary=True)
         try:
-            cur.execute(sql)
-            response = cur.fetchall()
-            cur.close()
+            response = self.db.select(sql)
         except e:
             print(e)
             raise
@@ -70,14 +68,11 @@ class MyModules:
         return response
 
     def get_count_list_by_fap_material(self):
+
         sql = 'SELECT fap_material ,COUNT(fap_material) as count FROM masturbation_log GROUP BY fap_material ORDER BY count DESC'
 
-        cnx = self.__db_connect()
-        cur = cnx.cursor(dictionary=True)
         try:
-            cur.execute(sql)
-            response = cur.fetchall()
-            cur.close()
+            response = self.db.select(sql)
         except e:
             print(e)
             raise
@@ -85,16 +80,13 @@ class MyModules:
         return response
 
     def get_list_by_otaku_fap_material(self, user):
+
         sql = "SELECT user, fap_material, COUNT(fap_material) as count from masturbation_log WHERE user = '{user}' GROUP BY fap_material ORDER BY count DESC".format(
             user = user,
         )
 
-        cnx = self.__db_connect()
-        cur = cnx.cursor(dictionary=True)
         try:
-            cur.execute(sql)
-            response = cur.fetchall()
-            cur.close()
+            response = self.db.select(sql)
         except e:
             print(e)
             raise

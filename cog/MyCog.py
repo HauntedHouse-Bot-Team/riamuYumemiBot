@@ -4,7 +4,7 @@ import random
 
 import discord
 from discord.ext import commands
-from src.MyModules import MyModules as myMod
+from src.MyModules import MyModules as MyMod
 
 class MyBot(commands.Cog):
 
@@ -64,18 +64,21 @@ class MyBot(commands.Cog):
             guild = ctx.guild
             channel = discord.utils.get(guild.text_channels, name=duplication_source_channel)
             new_channel = await mod.create_channel(ctx, channel, 'いたずら部屋')
-            #new_channel.send('@here')
+
         if ctx.content in ['Mischief managed', 'いたずら完了'] and ctx.channel.name =='いたずら部屋':
 
             await mod.delete_channel(ctx, 'いたずら完了')
 
+        if 'テキスト検出' == msg.content:
+            mod = MyMod()
+            await msg.channel.send(mod.text_detection(msg.attachments[0].url))
 
     @commands.command(name='致した')
     async def masturbation(self, ctx, arg):
         if not arg:
             return False
 
-        mod = myMod()
+        mod = MyMod()
 
         bot = self.bot.get_user(self.bot_id)
         usr_name = ctx.author.name
@@ -101,7 +104,7 @@ class MyBot(commands.Cog):
 
     @commands.command(name='サーバー別致し件数')
     async def masturbation_count_list_by_servers(self, ctx):
-        mod = myMod()
+        mod = MyMod()
         bot = self.bot.get_user(self.bot_id)
         icon = self.icon_url.format(
             id = str(self.bot_id),
@@ -118,7 +121,7 @@ class MyBot(commands.Cog):
 
     @commands.command(name='オタク別致し件数')
     async def masturbation_count_list_by_users(self, ctx):
-        mod = myMod()
+        mod = MyMod()
         bot = self.bot.get_user(self.bot_id)
         icon = self.icon_url.format(
             id = str(self.bot_id),
@@ -135,7 +138,7 @@ class MyBot(commands.Cog):
 
     @commands.command(name='おかずランキング')
     async def fap_material_ranking_list(self, ctx):
-        mod = myMod()
+        mod = MyMod()
         bot = self.bot.get_user(self.bot_id)
         icon = self.icon_url.format(
             id = str(self.bot_id),
@@ -154,7 +157,7 @@ class MyBot(commands.Cog):
 
     @commands.command(name='オタクのおかずリスト')
     async def fap_material_list_by_user(self, ctx, arg):
-        mod = myMod()
+        mod = MyMod()
         bot = self.bot.get_user(self.bot_id)
         icon = self.icon_url.format(
             id = str(self.bot_id),
@@ -176,8 +179,10 @@ class MyBot(commands.Cog):
 
     @commands.command(name='卒業')
     async def graduate(self, ctx, arg):
-        usr = self.bot.get_user(int(arg))
-        await ctx.guild.kick(usr)
+        for row in ctx.author.roles:
+            if row.name == 'botter':
+                usr = self.bot.get_user(int(arg))
+                await ctx.guild.kick(usr)
 
 def setup(bot):
     bot.add_cog(MyBot(bot))
