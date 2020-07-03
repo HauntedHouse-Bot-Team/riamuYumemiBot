@@ -100,3 +100,21 @@ class MyModules:
             raise
 
         return response
+
+    async def create_channel(self, ctx, duplication_source_channel, channel_name):
+        #category_id = ctx.channel.category_id
+        #category = ctx.guild.get_channel(category_id)
+        try:
+            new_channel = await duplication_source_channel.clone(name=channel_name)
+            return new_channel
+        except Exception as e:
+            print(e)
+            return False
+
+    async def delete_channel(self, ctx, reason):
+            try:
+                await ctx.channel.delete(reason=reason)
+                return True
+            except Exception as e:
+                print(e)
+                return False

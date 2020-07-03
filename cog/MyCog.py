@@ -40,6 +40,8 @@ class MyBot(commands.Cog):
         greeting_list = [
             'オタク！ぼくをすこれ！よ！',
             'こんにちはクズだよ！！',
+            'ばばーん！りあむちゃんの登場だよ！',
+            'Pサマ！ぼくのザコメンタルを傷つけずに育ててほしい！',
         ]
 
         embed = discord.Embed(description=random.choice(greeting_list))
@@ -53,6 +55,20 @@ class MyBot(commands.Cog):
         if guild.name == '幽霊屋敷':
             channel = discord.utils.get(guild.text_channels, name='玄関')
             await channel.send(embed=embed)
+
+    @commands.Cog.listener()
+    async def on_message(self, ctx):
+        mod = myMod()
+        if ctx.content in ['I am up to no good', '我、よからぬ事をたくらむ者なり']:
+            duplication_source_channel = 'われ、よからぬことをたくらむ者なり'
+            guild = ctx.guild
+            channel = discord.utils.get(guild.text_channels, name=duplication_source_channel)
+            new_channel = await mod.create_channel(ctx, channel, 'いたずら部屋')
+            #new_channel.send('@here')
+        if ctx.content in ['Mischief managed', 'いたずら完了'] and ctx.channel.name =='いたずら部屋':
+
+            await mod.delete_channel(ctx, 'いたずら完了')
+
 
     @commands.command(name='致した')
     async def masturbation(self, ctx, arg):
