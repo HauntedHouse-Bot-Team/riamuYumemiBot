@@ -57,20 +57,19 @@ class MyBot(commands.Cog):
             await channel.send(embed=embed)
 
     @commands.Cog.listener()
-    async def on_message(self, ctx):
-        mod = myMod()
-        if ctx.content in ['I am up to no good', '我、よからぬ事をたくらむ者なり']:
+    async def on_message(self, msg):
+        mod = MyMod()
+        if msg.content in ['I am up to no good', '我、よからぬ事をたくらむ者なり']:
             duplication_source_channel = 'われ、よからぬことをたくらむ者なり'
-            guild = ctx.guild
+            guild = msg.guild
             channel = discord.utils.get(guild.text_channels, name=duplication_source_channel)
-            new_channel = await mod.create_channel(ctx, channel, 'いたずら部屋')
+            new_channel = await mod.create_channel(msg, channel, 'いたずら部屋')
+            await new_channel.send('@everyone')
 
-        if ctx.content in ['Mischief managed', 'いたずら完了'] and ctx.channel.name =='いたずら部屋':
-
-            await mod.delete_channel(ctx, 'いたずら完了')
+        if msg.content in ['Mischief managed', 'いたずら完了'] and msg.channel.name =='いたずら部屋':
+            await mod.delete_channel(msg, 'いたずら完了')
 
         if 'テキスト検出' == msg.content:
-            mod = MyMod()
             await msg.channel.send(mod.text_detection(msg.attachments[0].url))
 
     @commands.command(name='致した')
