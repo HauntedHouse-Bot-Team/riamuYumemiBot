@@ -12,7 +12,7 @@ class DbConnect:
         try:
             db = connector.connect(
                 user = os.getenv('DB_USER'),
-                passwd = os.getenv('DB_PASSWD'),
+                passwd = os.getenv('DB_PASSWORD'),
                 host = os.getenv('DB_HOST'),
                 db = os.getenv('DB_DATABASE'),
             )
