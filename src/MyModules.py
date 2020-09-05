@@ -1,5 +1,4 @@
 import mysql.connector as connector
-import configparser
 import os
 
 from google.cloud import vision

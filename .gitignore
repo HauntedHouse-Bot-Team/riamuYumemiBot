@@ -1,5 +1,7 @@
 __pycache__
-config.ini
+google_credential.json
+.env
+
 
 # IDE and editor specific files #
 /nbproject
