@@ -12,6 +12,7 @@ start = "python main.py"
 discord-py = "*"
 mysql-connector = "*"
 google-cloud-vision = "*"
+python-dotenv = "*"
 
 [requires]
 python_version = "3.8"

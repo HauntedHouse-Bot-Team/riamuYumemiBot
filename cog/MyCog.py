@@ -1,5 +1,5 @@
-import configparser
 import os
+from dotenv import load_dotenv
 import random
 
 import discord
@@ -9,12 +9,11 @@ from src.MyModules import MyModules as MyMod
 class MyBot(commands.Cog):
 
     def __init__(self, bot):
-        base = os.path.dirname(os.path.abspath(__file__))
-        conf_path = os.path.normpath(os.path.join(base, '../config'))
-        conf = configparser.ConfigParser()
-        conf.read(conf_path+'/config.ini', encoding='utf-8')
+        base_path = os.path.dirname(os.path.abspath(__file__))
+        dotenv_path = os.path.join(base_path, '.env')
+        load_dotenv(dotenv_path)
         self.bot = bot
-        self.bot_id = int(conf['DEFAULT']['BOT_ID'])
+        self.bot_id = int(os.getenv('BOT_ID'))
         self.icon_url = 'https://cdn.discordapp.com/avatars/{id}/{avatar}.png'
 
     @commands.command()

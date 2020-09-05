@@ -11,10 +11,10 @@ class DbConnect:
         conf.read(conf_path+'/config/config.ini', encoding='utf-8')
         try:
             db = connector.connect(
-                user = conf['DATABASE']['USER'],
-                passwd = conf['DATABASE']['PASSWD'],
-                host = conf['DATABASE']['HOST'],
-                db = conf['DATABASE']['DB_NAME'],
+                user = os.getenv('DB_USER'),
+                passwd = os.getenv('DB_PASSWD'),
+                host = os.getenv('DB_HOST'),
+                db = os.getenv('DB_DATABASE'),
             )
             return db
         except Exception as e:
