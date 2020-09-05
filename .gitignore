@@ -1,6 +1,7 @@
 __pycache__
 google_credential.json
 .env
+docker-compose.yml
 
 
 # IDE and editor specific files #
