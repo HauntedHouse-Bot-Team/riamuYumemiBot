@@ -4,7 +4,7 @@ import os
 from google.cloud import vision
 from google.cloud.vision import types
 
-from src.DbConnect import DbConnect as db
+from src.DbModule import DbModule as db
 from src.PictureDownload import picture_download
 
 class MyModules:
@@ -48,7 +48,7 @@ class MyModules:
 
         try:
             response = self.db.select(sql)
-        except e:
+        except Exception as e:
             print(e)
             raise
 
@@ -60,7 +60,7 @@ class MyModules:
 
         try:
             response = self.db.select(sql)
-        except e:
+        except Exception as e:
             print(e)
             raise
 
@@ -72,7 +72,7 @@ class MyModules:
 
         try:
             response = self.db.select(sql)
-        except e:
+        except Exception as e:
             print(e)
             raise
 
@@ -86,7 +86,7 @@ class MyModules:
 
         try:
             response = self.db.select(sql)
-        except e:
+        except Exception as e:
             print(e)
             raise
 

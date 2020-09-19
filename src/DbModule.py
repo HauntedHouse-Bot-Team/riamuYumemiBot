@@ -2,7 +2,7 @@ import mysql.connector as connector
 import configparser
 import os
 
-class DbConnect:
+class DbModule:
 
     def __db_connect(self):
         base = os.path.dirname(os.path.abspath(__file__))
@@ -40,6 +40,7 @@ class DbConnect:
             response = cur.fetchall()
             cur.close()
         except Exception as e:
+            print(e)
             raise
 
         return response

@@ -1,6 +1,5 @@
 import os
 from dotenv import load_dotenv
-
 from discord.ext import commands
 
 INITIAL_EXTENSIONS = [
@@ -13,7 +12,7 @@ class MyBot(commands.Bot):
         for cog in INITIAL_EXTENSIONS:
             try:
                 self.load_extension(cog)
-            except Exception:
+            except:
                 traceback.print_exc()
 
     async def on_ready(self):
