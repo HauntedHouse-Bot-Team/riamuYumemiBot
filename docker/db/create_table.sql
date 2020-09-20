@@ -11,7 +11,7 @@ CREATE TABLE `masturbation_log` (
 
 CREATE TABLE `ghosts` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `ghost_id` int(10) unsigned NOT NULL COMMENT '幽霊屋敷のユーザーID',
+  `ghost_id` bigint(20) unsigned NOT NULL COMMENT '幽霊屋敷のユーザーID',
   `gold` bigint(20) unsigned NOT NULL DEFAULT '9000' COMMENT 'サーバー内通貨(みつは)',
   `del_flg` tinyint(1) NOT NULL DEFAULT '0' COMMENT '削除フラグ',
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
