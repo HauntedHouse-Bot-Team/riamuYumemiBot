@@ -20,6 +20,11 @@ class DbModule:
         except Exception as e:
             print(e)
             raise
+    
+    def __get_value(self, values: list):
+        return '({parameters})'.format(
+            parameters = ', '.join(str('\'' + str(parameter) + '\'') for parameter in values)
+        )
 
     def insert(self, table: str, values: dict):
         cnx = self.__db_connect()
@@ -35,6 +40,27 @@ class DbModule:
             values =  ', '.join(str('\'' + parameter + '\'') for parameter in parameters)
         )
 
+        try:
+            cur.execute(sql)
+            cnx.commit()
+            return True
+        except:
+            cnx.rollback()
+            raise
+
+    def multiple_insert(self, table: str, columns: list, values: list):
+        cnx = self.__db_connect()
+        cur = cnx.cursor()
+        parameters = []
+        for value in values:
+            parameters.append(self.__get_value(value))
+
+        sql = "INSERT INTO `{table}` ({columns}) VALUES {values}".format(
+            table = table,
+            columns = ', '.join(columns),
+            values =  ', '.join(parameters)
+        )
+        print(sql)
         try:
             cur.execute(sql)
             cnx.commit()
