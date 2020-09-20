@@ -27,19 +27,15 @@ class MyModules:
         return texts[0].description
 
     def seve_masturbation_log(self, user: str, fap_material: str, guild: str):
-
-        sql = "INSERT INTO `{table}` (user, fap_material, guild) VALUES ('{user}', '{fap_material}', '{guild}')".format(
-            table = 'masturbation_log',
-            user = user,
-            fap_material = fap_material,
-            guild = guild
-        )
-
+        
         try:
-            self.db.insert(sql)
+            self.db.insert('masturbation_log', {
+                'user': user,
+                'fap_material': fap_material,
+                'guild': guild
+            })
             return True
         except:
-            cnx.rollback()
             raise
 
     def get_count_list_by_guild(self):

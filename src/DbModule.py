@@ -21,9 +21,20 @@ class DbModule:
             print(e)
             raise
 
-    def insert(self, sql: str):
+    def insert(self, table: str, values: dict):
         cnx = self.__db_connect()
         cur = cnx.cursor()
+
+        columns = list(values.keys())
+        parameters = list(values.values())
+
+
+        sql = "INSERT INTO `{table}` ({columns}) VALUES ({values})".format(
+            table = table,
+            columns = ', '.join(columns),
+            values =  ', '.join(str('\'' + parameter + '\'') for parameter in parameters)
+        )
+
         try:
             cur.execute(sql)
             cnx.commit()
