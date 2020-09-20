@@ -5,6 +5,7 @@ import random
 import discord
 from discord.ext import commands
 from src.MyModules import MyModules as MyMod
+from src.UserModules import UserModules as UserMod
 
 class MyBot(commands.Cog):
 
@@ -181,6 +182,21 @@ class MyBot(commands.Cog):
             if row.name == 'botter':
                 usr = self.bot.get_user(int(arg))
                 await ctx.guild.kick(usr)
+
+    @commands.command()
+    async def member_register(self, ctx):
+        if '幽霊屋敷' != ctx.guild.name:
+            return False
+
+        mod = UserMod()
+        members = []
+        for member in ctx.guild.members:
+            await ctx.send(member.id)
+            members.append([
+                member.id,
+                9000,
+            ])
+        mod.all_member_register(members)
 
 def setup(bot):
     bot.add_cog(MyBot(bot))

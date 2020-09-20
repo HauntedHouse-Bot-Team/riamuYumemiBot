@@ -1,6 +1,8 @@
 __pycache__
 google_credential.json
 .env
+static/UploadImages/*
+!static/UploadImages/.gitkeep
 docker-compose.yml
 
 
@@ -10,6 +12,7 @@ docker-compose.yml
 Session.vim
 *.swp
 *~
+.vs
 
 # OS generated files #
 .DS_Store

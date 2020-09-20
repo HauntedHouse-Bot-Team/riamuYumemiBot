@@ -4,7 +4,7 @@ import os
 from google.cloud import vision
 from google.cloud.vision import types
 
-from src.DbConnect import DbConnect as db
+from src.DbModule import DbModule as db
 from src.PictureDownload import picture_download
 
 class MyModules:
@@ -27,19 +27,15 @@ class MyModules:
         return texts[0].description
 
     def seve_masturbation_log(self, user: str, fap_material: str, guild: str):
-
-        sql = "INSERT INTO `{table}` (user, fap_material, guild) VALUES ('{user}', '{fap_material}', '{guild}')".format(
-            table = 'masturbation_log',
-            user = user,
-            fap_material = fap_material,
-            guild = guild
-        )
-
+        
         try:
-            self.db.insert(sql)
+            self.db.insert('masturbation_log', {
+                'user': user,
+                'fap_material': fap_material,
+                'guild': guild
+            })
             return True
         except:
-            cnx.rollback()
             raise
 
     def get_count_list_by_guild(self):
@@ -48,7 +44,7 @@ class MyModules:
 
         try:
             response = self.db.select(sql)
-        except e:
+        except Exception as e:
             print(e)
             raise
 
@@ -60,7 +56,7 @@ class MyModules:
 
         try:
             response = self.db.select(sql)
-        except e:
+        except Exception as e:
             print(e)
             raise
 
@@ -72,7 +68,7 @@ class MyModules:
 
         try:
             response = self.db.select(sql)
-        except e:
+        except Exception as e:
             print(e)
             raise
 
@@ -86,7 +82,7 @@ class MyModules:
 
         try:
             response = self.db.select(sql)
-        except e:
+        except Exception as e:
             print(e)
             raise
 
