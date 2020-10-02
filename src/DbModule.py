@@ -60,7 +60,7 @@ class DbModule:
             columns = ', '.join(columns),
             values =  ', '.join(parameters)
         )
-        print(sql)
+
         try:
             cur.execute(sql)
             cnx.commit()
@@ -76,8 +76,7 @@ class DbModule:
             cur.execute(sql)
             response = cur.fetchall()
             cur.close()
-        except Exception as e:
-            print(e)
+        except:
             raise
 
         return response

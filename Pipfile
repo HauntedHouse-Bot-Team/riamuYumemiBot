@@ -13,6 +13,7 @@ discord-py = "*"
 mysql-connector = "*"
 google-cloud-vision = "*"
 python-dotenv = "*"
+wordcloud = "*"
 
 [requires]
 python_version = "3.8"

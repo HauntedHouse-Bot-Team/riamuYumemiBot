@@ -3,6 +3,8 @@ google_credential.json
 .env
 static/UploadImages/*
 !static/UploadImages/.gitkeep
+static/WorldCloud/*
+!static/WorldCloud/.gitkeep
 docker-compose.yml
 
 
