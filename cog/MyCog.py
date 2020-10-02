@@ -6,6 +6,7 @@ import discord
 from discord.ext import commands
 from src.MyModules import MyModules as MyMod
 from src.UserModules import UserModules as UserMod
+import src.WorldCloudModule as world_cloud
 
 class MyBot(commands.Cog):
 
@@ -66,7 +67,7 @@ class MyBot(commands.Cog):
             new_channel = await mod.create_channel(msg, channel, 'いたずら部屋')
             await new_channel.send('@everyone')
 
-        if msg.content in ['Mischief managed', 'いたずら完了'] and msg.channel.name =='いたずら部屋':
+        if msg.content in ['Mischief managed', 'いたずら完了'] and msg.channel.name == 'いたずら部屋':
             await mod.delete_channel(msg, 'いたずら完了')
 
         if 'テキスト検出' == msg.content:
@@ -175,6 +176,24 @@ class MyBot(commands.Cog):
         embed = discord.Embed(title='オタクのおかずリスト', description=embed_description, color=0xff66cf)
         embed.set_author(name='夢見りあむ', icon_url=icon)
         await ctx.send(embed=embed)
+
+    @commands.command('おかずの使用頻度可視化')
+    async def fap_material_visualization(self, ctx, target: str = ''):
+        mod = MyMod()
+        fap_material_list: list = []
+        photo_file_name: str = ''
+        if (not target):
+            for row in await mod.load_fap_material():
+                fap_material_list.append(row['fap_material'])
+            photo_file_name = world_cloud.create_world_cloud(fap_material_list)
+        else:
+            for row in await mod.get_fap_material_of_nard(target):
+                fap_material_list.append(row['fap_material'])
+            photo_file_name = world_cloud.create_world_cloud(fap_material_list, target)
+
+
+        await ctx.send(file=discord.File(photo_file_name))
+
 
     @commands.command(name='卒業')
     async def graduate(self, ctx, arg):
