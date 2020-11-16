@@ -2,7 +2,6 @@ import mysql.connector as connector
 import os
 
 from google.cloud import vision
-from google.cloud.vision import types
 
 from src.DbModule import DbModule as db
 from src.PictureDownload import picture_download
@@ -28,7 +27,7 @@ class MyModules:
         return texts[0].description
 
     def seve_masturbation_log(self, user: str, fap_material: str, guild: str):
-        
+
         try:
             self.db.insert(self.table, {
                 'user': user,
@@ -113,7 +112,7 @@ class MyModules:
         except Exception as e:
             print(e)
             return False
-    
+
     async def load_fap_material(self) -> list:
         sql = f'SELECT fap_material FROM {self.table}'
 
