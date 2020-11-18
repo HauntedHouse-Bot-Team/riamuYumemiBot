@@ -80,6 +80,12 @@ class MyBot(commands.Cog):
             filie_path = next_cloud_mod.get_file(random.choice(files), 'takada_yuki.png')
             await msg.channel.send(file=discord.File(filie_path))
 
+        if msg.content in ['松井恵理子', 'まつえり']:
+            files = next_cloud_mod.get_file_list('Photos/matsueri')
+            filie_path = next_cloud_mod.get_file(random.choice(files), 'matsueri.png')
+            await msg.channel.send(file=discord.File(filie_path))
+
+
     @commands.command(name='致した')
     async def masturbation(self, ctx, arg):
         if not arg:
