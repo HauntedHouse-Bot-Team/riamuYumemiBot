@@ -1,14 +1,9 @@
 import mysql.connector as connector
-import configparser
 import os
 
 class DbModule:
 
     def __db_connect(self):
-        base = os.path.dirname(os.path.abspath(__file__))
-        conf_path = os.path.normpath(os.path.join(base, '../'))
-        conf = configparser.ConfigParser()
-        conf.read(conf_path+'/config/config.ini', encoding='utf-8')
         try:
             db = connector.connect(
                 user = os.getenv('DB_USER'),

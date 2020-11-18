@@ -7,6 +7,7 @@ from discord.ext import commands
 from src.MyModules import MyModules as MyMod
 from src.UserModules import UserModules as UserMod
 import src.WorldCloudModule as world_cloud
+from src.NextCloudModules import NextCloudModules as NextCloudMod
 
 class MyBot(commands.Cog):
 
@@ -60,6 +61,7 @@ class MyBot(commands.Cog):
     @commands.Cog.listener()
     async def on_message(self, msg):
         mod = MyMod()
+        next_cloud_mod = NextCloudMod()
         if msg.content in ['I am up to no good', '我、よからぬ事をたくらむ者なり']:
             duplication_source_channel = 'われ、よからぬことをたくらむ者なり'
             guild = msg.guild
@@ -72,6 +74,11 @@ class MyBot(commands.Cog):
 
         if 'テキスト検出' == msg.content:
             await msg.channel.send(mod.text_detection(msg.attachments[0].url))
+        
+        if msg.content == '高田憂希':
+            files = next_cloud_mod.get_file_list('Photos/takada_yuki')
+            filie_path = next_cloud_mod.get_file(random.choice(files), 'takada_yuki.png')
+            await msg.channel.send(file=discord.File(filie_path))
 
     @commands.command(name='致した')
     async def masturbation(self, ctx, arg):
