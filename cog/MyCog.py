@@ -75,12 +75,12 @@ class MyBot(commands.Cog):
         if 'テキスト検出' == msg.content:
             await msg.channel.send(mod.text_detection(msg.attachments[0].url))
         
-        if msg.content == '高田憂希':
+        if '高田憂希' in msg.content:
             files = next_cloud_mod.get_file_list('Photos/takada_yuki')
             filie_path = next_cloud_mod.get_file(random.choice(files), 'takada_yuki.png')
             await msg.channel.send(file=discord.File(filie_path))
 
-        if msg.content in ['松井恵理子', 'まつえり']:
+        if ['松井恵理子', 'まつえり'] in msg.content:
             files = next_cloud_mod.get_file_list('Photos/matsueri')
             filie_path = next_cloud_mod.get_file(random.choice(files), 'matsueri.png')
             await msg.channel.send(file=discord.File(filie_path))
