@@ -80,10 +80,13 @@ class MyBot(commands.Cog):
             filie_path = next_cloud_mod.get_file(random.choice(files), 'takada_yuki.png')
             await msg.channel.send(file=discord.File(filie_path))
 
-        if ['松井恵理子', 'まつえり'] in msg.content:
-            files = next_cloud_mod.get_file_list('Photos/matsueri')
-            filie_path = next_cloud_mod.get_file(random.choice(files), 'matsueri.png')
-            await msg.channel.send(file=discord.File(filie_path))
+
+
+        for key_word in ['松井恵理子', 'まつえり']:
+            if key_word in msg.content:
+                files = next_cloud_mod.get_file_list('Photos/matsueri')
+                filie_path = next_cloud_mod.get_file(random.choice(files), 'matsueri.png')
+                await msg.channel.send(file=discord.File(filie_path))
 
 
     @commands.command(name='致した')
