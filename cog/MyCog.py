@@ -217,6 +217,10 @@ class MyBot(commands.Cog):
             if row.name == 'botter':
                 usr = self.bot.get_user(int(arg))
                 await ctx.guild.kick(usr)
+                channel = discord.utils.get(ctx.guild.text_channels, name='入場ゲート')
+                invite = await channel.create_invite(max_arg=3600)
+                dm_channel = await usr.create_dm()
+                await dm_channel.send(invite)
 
     @commands.command()
     async def member_register(self, ctx):
