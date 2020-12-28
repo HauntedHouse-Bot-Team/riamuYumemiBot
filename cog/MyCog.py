@@ -74,7 +74,7 @@ class MyBot(commands.Cog):
 
         if 'テキスト検出' == msg.content:
             await msg.channel.send(mod.text_detection(msg.attachments[0].url))
-        
+
         if '高田憂希' in msg.content:
             files = next_cloud_mod.get_file_list('Photos/takada_yuki')
             filie_path = next_cloud_mod.get_file(random.choice(files), 'takada_yuki.png')
@@ -217,7 +217,7 @@ class MyBot(commands.Cog):
             if row.name == 'botter':
                 usr = self.bot.get_user(int(arg))
                 await ctx.guild.kick(usr)
-                channel = discord.utils.get(ctx.guild.text_channels, name='入場ゲート')
+                channel = discord.utils.get(ctx.guild.text_channels, name='玄関')
                 invite = await channel.create_invite(max_arg=3600)
                 dm_channel = await usr.create_dm()
                 await dm_channel.send(invite)
