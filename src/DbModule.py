@@ -97,7 +97,6 @@ class DbModule:
                 ))
             sql += ', '.join(narrow_doan)
         
-        print(sql)
         try:
             cur.execute(sql)
             cnx.commit()
