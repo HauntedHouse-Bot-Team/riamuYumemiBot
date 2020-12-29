@@ -232,8 +232,9 @@ class MyBot(commands.Cog):
         mod = UserMod()
         members = []
         for member in ctx.guild.members:
-            await ctx.send(member.id)
+            await ctx.send(member.display_name)
             members.append([
+                member.display_name,
                 member.id,
                 9000,
             ])
