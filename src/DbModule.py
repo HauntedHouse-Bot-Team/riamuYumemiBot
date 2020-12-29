@@ -73,5 +73,34 @@ class DbModule:
             cur.close()
         except:
             raise
+    
+    def update(self, table: str, columns: list, values: list, narrow_down_column: list = None, narrow_down_values: list = None):
+        cnx = self.__db_connect()
+        cur = cnx.cursor()
 
-        return response
+        sql = "UPDATE `{table}` SET ".format(
+            table = table
+        )
+        for index in range(len(columns)):
+            sql += "{column} = {value}".format(
+                column = columns[index],
+                value = values[index],
+            )
+        if narrow_down_column:
+            sql += " WHERE "
+            narrow_doan = []
+            for index in range(len(narrow_down_column)):
+                narrow_doan.append("{column} = {value}".format(
+                    column = narrow_down_column[index],
+                    value = narrow_down_values[index],
+                ))
+            sql += ', '.join(narrow_doan)
+        
+        print(sql)
+        try:
+            cur.execute(sql)
+            cnx.commit()
+            return True
+        except:
+            cnx.rollback()
+            raise
