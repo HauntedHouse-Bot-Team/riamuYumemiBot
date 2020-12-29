@@ -62,7 +62,7 @@ class MyBot(commands.Cog):
             ghost = mod.registration_confirm(member.id)
             if ghost:
                 mod.member_undelete(member.id)
-                now = datetime.strptime(datetime.now(self.JST).strftime("%Y-%m-%d %H:%M:%S"), '%Y-%m-%d %H:%M:%S')
+                now = datetime.strptime(datetime.now(self.JST).strftime("%Y-%m-%d %H:%M:%S.%f"), '%Y-%m-%d %H:%M:%S.%f')
                 wet = now - ghost[0]['updated_at']
                 embed = discord.Embed(description='入学RTA')
                 embed.set_author(name='夢見りあむ', icon_url=icon)
