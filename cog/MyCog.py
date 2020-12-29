@@ -1,7 +1,7 @@
 import os
 from dotenv import load_dotenv
 import random
-
+from datetime import datetime, timedelta, timezone
 import discord
 from discord.ext import commands
 from src.MyModules import MyModules as MyMod
@@ -18,6 +18,7 @@ class MyBot(commands.Cog):
         self.bot = bot
         self.bot_id = int(os.getenv('BOT_ID'))
         self.icon_url = 'https://cdn.discordapp.com/avatars/{id}/{avatar}.png'
+        self.JST = timezone(timedelta(hours=+9), 'JST')
 
     @commands.command()
     async def hello(self, ctx):
@@ -57,6 +58,16 @@ class MyBot(commands.Cog):
         if guild.name == '幽霊屋敷':
             channel = discord.utils.get(guild.text_channels, name='玄関')
             await channel.send(embed=embed)
+            mod = UserMod()
+            ghost = mod.registration_confirm(member.id)
+            if ghost:
+                mod.member_undelete(member.id)
+                now = datetime.strptime(datetime.now(self.JST).strftime("%Y-%m-%d %H:%M:%S"), '%Y-%m-%d %H:%M:%S')
+                wet = now - ghost[0]['updated_at']
+                embed = discord.Embed(description='入学RTA')
+                embed.set_author(name='夢見りあむ', icon_url=icon)
+                embed.add_field(name=wet, value=f'{member.mention}', inline=False)
+                await channel.send(embed=embed)
 
     @commands.Cog.listener()
     async def on_message(self, msg):
