@@ -73,7 +73,8 @@ class DbModule:
             cur.close()
         except:
             raise
-    
+        return response
+        
     def update(self, table: str, columns: list, values: list, narrow_down_column: list = None, narrow_down_values: list = None):
         cnx = self.__db_connect()
         cur = cnx.cursor()
