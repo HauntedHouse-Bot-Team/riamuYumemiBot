@@ -221,6 +221,8 @@ class MyBot(commands.Cog):
                 invite = await channel.create_invite(max_arg=3600)
                 dm_channel = await usr.create_dm()
                 await dm_channel.send(invite)
+                mod = UserMod()
+                mod.member_delete(arg)
 
     @commands.command()
     async def member_register(self, ctx):
