@@ -14,7 +14,7 @@ mysql-connector = "*"
 python-dotenv = "*"
 wordcloud = "*"
 urllib3 = "*"
-multidict = "*"
+requests = "*"
 
 [requires]
-python_version = "3.8"
+python_version = "3.8.5"
