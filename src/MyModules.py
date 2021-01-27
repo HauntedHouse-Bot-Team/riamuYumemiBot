@@ -1,10 +1,7 @@
 import mysql.connector as connector
 import os
 
-from google.cloud import vision
-
 from src.DbModule import DbModule as db
-from src.PictureDownload import picture_download
 
 class MyModules:
 
