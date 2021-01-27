@@ -83,15 +83,10 @@ class MyBot(commands.Cog):
         if msg.content in ['Mischief managed', 'いたずら完了'] and msg.channel.name == 'いたずら部屋':
             await mod.delete_channel(msg, 'いたずら完了')
 
-        if 'テキスト検出' == msg.content:
-            await msg.channel.send(mod.text_detection(msg.attachments[0].url))
-
         if '高田憂希' in msg.content:
             files = next_cloud_mod.get_file_list('Photos/takada_yuki')
             filie_path = next_cloud_mod.get_file(random.choice(files), 'takada_yuki.png')
             await msg.channel.send(file=discord.File(filie_path))
-
-
 
         for key_word in ['松井恵理子', 'まつえり']:
             if key_word in msg.content:
