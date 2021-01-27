@@ -9,10 +9,13 @@ RUN wget https://noto-website-2.storage.googleapis.com/pkgs/NotoSansCJKjp-hinted
     cp *otf /usr/share/fonts/truetype/noto && \
     fc-cache -f -v
 
+# ffmpeg
+RUN apt-get update && apt-get install ffmpeg -y
+
 WORKDIR /code
 
 ADD . .
 
-RUN pip install pipenv && pipenv install --system
+RUN pip install --upgrade pip && pip install pipenv && pipenv install --system
 
 CMD ["python", "main.py"]
