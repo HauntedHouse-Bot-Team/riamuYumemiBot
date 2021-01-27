@@ -1,30 +1,13 @@
 import mysql.connector as connector
 import os
 
-from google.cloud import vision
-
 from src.DbModule import DbModule as db
-from src.PictureDownload import picture_download
 
 class MyModules:
 
     def __init__(self):
         self.db = db()
         self.table  = 'masturbation_log'
-
-    def text_detection(self, url: str):
-
-        file_path = picture_download(url)
-        client = vision.ImageAnnotatorClient()
-
-        with open(file_path, 'rb') as image_file:
-            content = image_file.read()
-
-        image = vision.types.Image(content=content)
-        response = client.text_detection(image=image)
-        texts = response.text_annotations
-
-        return texts[0].description
 
     def seve_masturbation_log(self, user: str, fap_material: str, guild: str):
 
