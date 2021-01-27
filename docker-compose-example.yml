@@ -6,8 +6,6 @@ services:
       dockerfile: ./docker/bot/Dockerfile
     volumes:
       - .:/code
-    environment:
-      - GOOGLE_APPLICATION_CREDENTIALS=/code/google_credential.json
     depends_on:
       - db
   db:

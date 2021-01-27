@@ -12,20 +12,6 @@ class MyModules:
         self.db = db()
         self.table  = 'masturbation_log'
 
-    def text_detection(self, url: str):
-
-        file_path = picture_download(url)
-        client = vision.ImageAnnotatorClient()
-
-        with open(file_path, 'rb') as image_file:
-            content = image_file.read()
-
-        image = vision.types.Image(content=content)
-        response = client.text_detection(image=image)
-        texts = response.text_annotations
-
-        return texts[0].description
-
     def seve_masturbation_log(self, user: str, fap_material: str, guild: str):
 
         try:
